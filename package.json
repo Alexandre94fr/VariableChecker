@@ -1,0 +1,23 @@
+{
+  "name": "net.alexandre94fr.variablechecker",
+  "version": "1.0.0",
+  "displayName": "VariableChecker",
+  "description": "A tool to check if a/multiple variables are exactly what you want in Unity. \nYou can found more documentation in the project's GitHub repository (clic on the 'Documentation' button) and in the code.",
+  "documentationUrl": "https://github.com/Alexandre94fr/VariableChecker",
+  "unity": "2022.3",
+  "author": {
+    "name": "Alexandre RICHARD",
+    "email": "Alexandre94.fr@gmail.com",
+    "url": "https://github.com/Alexandre94fr"
+  },
+  "keywords": [
+    "tool",
+    "utility",
+    "variable",
+    "variable checker",
+    "unity",
+    "security",
+    "checking",
+    "check"
+  ]
+}
