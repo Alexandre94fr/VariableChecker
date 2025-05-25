@@ -14,10 +14,56 @@ namespace VariableCheckerPackage
             IsVariableNullCheck,
         };
 
+        #region Utility methods
+
         public static string GetCheckErrorMessagePrefix(string p_gameObjectName, string p_variableName)
         {
             return $"<color=red>ERROR !</color> The variable '{p_variableName}' in '{p_gameObjectName}' GameObject";
         }
+
+        // For internal use
+        static string GetCheckWarningMessagePrefix(string p_gameObjectName, string p_variableName)
+        {
+            return $"<color=yellow>WARNING !</color> The variable '{p_variableName}' in '{p_gameObjectName}' GameObject";
+        }
+
+        // For internal use
+        static bool TryConvertToFloat(object p_input, out float p_result)
+        {
+            // Note : We use a switch here and not 'Convert.ToSingle()'
+            //        because we want to control whitch type can be converted
+
+            switch (p_input)
+            {
+                case float f:
+                    p_result = f;
+                    return true;
+                case int i:
+                    p_result = i;
+                    return true;
+                case double d:
+                    p_result = (float)d;
+                    return true;
+                case long l:
+                    p_result = l;
+                    return true;
+                case short s:
+                    p_result = s;
+                    return true;
+                case byte b:
+                    p_result = b;
+                    return true;
+                case decimal deci:
+                    p_result = (float)deci;
+                    return true;
+
+                default:
+                    p_result = 0f;
+                    return false;
+            }
+        }
+
+        #endregion
 
         #region -= Checks =-
 
@@ -37,7 +83,19 @@ namespace VariableCheckerPackage
 
         public static bool IsNumberVariableUnderZeroCheck(string p_gameObjectName, (object variable, string variableName) p_variableToCheck)
         {
-            if (p_variableToCheck.variable is float variableFloat && variableFloat < 0)
+            // Converting the variable value into a number to be able to test it
+            if (!TryConvertToFloat(p_variableToCheck.variable, out float floatVariable))
+            {
+                Debug.LogWarning(
+                    $"{GetCheckWarningMessagePrefix(p_gameObjectName, p_variableToCheck.variableName)} is not a number, " +
+                    $"so we can't test it throw the {nameof(IsNumberVariableUnderZeroCheck)} check.\n" +
+
+                    $"THE TEST HAS BEEN IGNORED"
+                );
+                return false;
+            }
+
+            if (floatVariable < 0)
             {
                 Debug.LogError(
                     $"{GetCheckErrorMessagePrefix(p_gameObjectName, p_variableToCheck.variableName)} is under zero."
@@ -50,7 +108,19 @@ namespace VariableCheckerPackage
 
         public static bool IsNumberVariableEqualZeroCheck(string p_gameObjectName, (object variable, string variableName) p_variableToCheck)
         {
-            if (p_variableToCheck.variable is float variableFloat && variableFloat == 0)
+            // Converting the variable value into a number to be able to test it
+            if (!TryConvertToFloat(p_variableToCheck.variable, out float floatVariable))
+            {
+                Debug.LogWarning(
+                    $"{GetCheckWarningMessagePrefix(p_gameObjectName, p_variableToCheck.variableName)} is not a number, " +
+                    $"so we can't test it throw the {nameof(IsNumberVariableEqualZeroCheck)} check.\n" +
+
+                    $"THE TEST HAS BEEN IGNORED"
+                );
+                return false;
+            }
+
+            if (floatVariable == 0)
             {
                 Debug.LogError(
                     $"{GetCheckErrorMessagePrefix(p_gameObjectName, p_variableToCheck.variableName)} equals zero."
