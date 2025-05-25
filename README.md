@@ -26,7 +26,7 @@ By using VariableChecker.AreVariablesValid(...), you can write safer, more maint
 
 No need to write and rewrite the same if statements for every class. Just plug and play.
 
-**Here’s is a typical examples of variables checks, with and without the VariableChecker :**
+**Here’s is a typical example of variables checks, with and without the VariableChecker :**
 
 ![VariableCheckerComparaison1](https://github.com/user-attachments/assets/a1d45565-5c95-4f08-9d10-6ac5fdb74b9b)
 ![VariableCheckerComparaison2](https://github.com/user-attachments/assets/cde0ad80-6d47-4b2d-8cd4-ca08f7781195)
@@ -36,7 +36,7 @@ No need to write and rewrite the same if statements for every class. Just plug a
 
 Here’s are typical examples of how to use the VariableChecker tool in a MonoBehaviour class :
 
-**N°1 example :**
+**N°1 example (classic use) :**
 
 Code :
 
@@ -50,7 +50,7 @@ Result :
 
 ![VariableCheckerUseExample3](https://github.com/user-attachments/assets/db940a17-f5e4-48e1-a36c-da1f2dbded9d)
 
-**N°2 example :**
+**N°2 example (custom check use) :**
 
 Code :
 
