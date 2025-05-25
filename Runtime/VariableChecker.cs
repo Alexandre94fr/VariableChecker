@@ -16,7 +16,7 @@ namespace VariableCheckerPackage
 
         static string GetErrorMessagePrefix(string p_gameObjectName, string p_variableName)
         {
-            return $"ERROR ! The variable '{p_variableName}' in '{p_gameObjectName}' GameObject";
+            return $"<color=red>ERROR !</color> The variable '{p_variableName}' in '{p_gameObjectName}' GameObject";
         }
 
         #region -= Checks =-
