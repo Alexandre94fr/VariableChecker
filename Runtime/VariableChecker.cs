@@ -21,14 +21,12 @@ namespace VariableCheckerPackage
             return $"<color=red>ERROR !</color> The variable '{p_variableName}' in '{p_gameObjectName}' GameObject";
         }
 
-        // For internal use
-        static string GetCheckWarningMessagePrefix(string p_gameObjectName, string p_variableName)
+        public static string GetCheckWarningMessagePrefix(string p_gameObjectName, string p_variableName)
         {
             return $"<color=yellow>WARNING !</color> The variable '{p_variableName}' in '{p_gameObjectName}' GameObject";
         }
 
-        // For internal use
-        static bool TryConvertToFloat(object p_input, out float p_result)
+        public static bool TryConvertToFloat(object p_input, out float p_result)
         {
             // Note : We use a switch here and not 'Convert.ToSingle()'
             //        because we want to control whitch type can be converted
@@ -41,8 +39,8 @@ namespace VariableCheckerPackage
                 case int i:
                     p_result = i;
                     return true;
-                case double d:
-                    p_result = (float)d;
+                case double doubl:
+                    p_result = (float)doubl;
                     return true;
                 case long l:
                     p_result = l;
@@ -53,8 +51,8 @@ namespace VariableCheckerPackage
                 case byte b:
                     p_result = b;
                     return true;
-                case decimal deci:
-                    p_result = (float)deci;
+                case decimal decim:
+                    p_result = (float)decim;
                     return true;
 
                 default:
