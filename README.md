@@ -1,45 +1,68 @@
-# Instantiator
+# VariableChecker
 
 ## ➤ Creation context :
-During several group game development projects on the Unity engine, I noticed that each team member implemented singletons in their own way, often with inconsistent safety checks and conflict management strategies.
+During several group game development projects on the Unity engine, I noticed that developers often forgot to validate critical serialized variables through the inspector or code. These oversights led to numerous runtime exceptions and bugs, often hard to track. 
 
-To speed up our workflow and avoid redundant boilerplate code, I decided to create a centralized tool to standardize the singleton pattern across projects.
+_I have lost the count of the number of hours wasted debugging code just to realize that an object reference in a prefab that had nothing to do with the problem and was external to the prefab (and therefore not saved by Unity) was missing._
 
-Exactly one year later, I'm sharing this tool with you for free and open-source use.
+So to prevent this kind of problem from happening again, I have created the VariableChecker (a centralized tool that handles variable validation in a clean and extensible way).
+
+I'm sharing this tool with you for free and open-source use.
 
 
 ## ➤ Description :
-### ▸ What is a Singleton ?
+### ▸ What is VariableChecker ?
 
-A singleton is a software design pattern that ensures a class has **only one instance** and provides a **global point of access to it**. It’s commonly used in Unity for manager-like components, such as audio managers, game managers _(please avoid putting everything into a giant GameManager class)_, and more, where a single authoritative instance is needed (across scenes or not).
+VariableChecker is a static Unity utility script that simplifies the process of verifying / checking the content of a variable in your game objects or even static scripts.
 
-### ▸ What is Instantiator ?
+By using VariablesChecker.AreVariablesValid(...), you can:
 
-Instantiator is a static Unity utility script that simplifies the process of implementing singleton patterns in your game objects. It automates :
+- Log errors when variables' value are null, zero, or negative.
+- Write cleaner Start/Awake methods with centralized error logging.
+- Avoid repeating tedious if (x == null) code everywhere.
+- Easily add your own generic checks if needed.
 
-- Detection of existing instances.
-- Conflict resolution (with customizable behaviors like warnings, automatic destruction, or editor pause).
-- Centralized naming convention enforcement for singleton variables (public static TYPE Instance).
+By using VariableChecker.AreVariablesValid(...), you can write safer, more maintainable, and faster variable checking, especially in collaborative projects.
 
-By using Instantiator.GetInstance(...), you can write safer, more maintainable, and faster singleton implementations, especially in collaborative projects.
+No need to write and rewrite the same if statements for every class. Just plug and play.
 
-No need to write and rewrite the same boilerplate for every class. Just plug and play.
+**Here’s is a typical examples of variables checks, with and without the VariableChecker :**
 
-**Here’s are some typical examples of singleton creation, with and without the Instantiator:**
-
-![InstantiatorUseExample_FromTo_RawImage1](https://github.com/user-attachments/assets/b77cd1c2-7f61-48ed-a113-33231d8ae35f)
-![InstantiatorUseExample_FromTo_RawImage2](https://github.com/user-attachments/assets/db2e6a17-8064-4725-a8dc-fb621c260b45)
+![VariableCheckerComparaison1](https://github.com/user-attachments/assets/a1d45565-5c95-4f08-9d10-6ac5fdb74b9b)
+![VariableCheckerComparaison2](https://github.com/user-attachments/assets/cde0ad80-6d47-4b2d-8cd4-ca08f7781195)
 
 
 ## ➤ Utilization examples :
 
-Here’s a typical example of how to use the Instantiator tool in a singleton class :
+Here’s are typical examples of how to use the VariableChecker tool in a MonoBehaviour class :
 
-![InstantiatorUseExample](https://github.com/user-attachments/assets/23f1f22c-1698-4b6f-9762-3860a2d26037)
- 
-As you can see in the first example we use reflexion to get the 'Instance' variable, if needed you can change the targeted variable by going in the Instantiator and changing the DEFAULT_SINGLETON_VARIABLE_NAME variable's value.
+**N°1 example :**
 
-**Note :** If you need more documentation check out the Instantiator class.
+Code :
+
+![VariableCheckerUseExample1](https://github.com/user-attachments/assets/8636dd46-e6cf-4d4e-bbf8-be991c76c784)
+
+Object :
+
+![VariableCheckerUseExample2](https://github.com/user-attachments/assets/6460b870-4577-424d-844b-6a0564663f08)
+
+Result :
+
+![VariableCheckerUseExample3](https://github.com/user-attachments/assets/db940a17-f5e4-48e1-a36c-da1f2dbded9d)
+
+**N°2 example :**
+
+Code :
+
+![VariableCheckerUseExample4](https://github.com/user-attachments/assets/46745bea-b005-4d5a-ae09-c7ab08e63d23)
+![VariableCheckerUseExample5](https://github.com/user-attachments/assets/cf637d27-5533-4cee-ba94-30273a49565b)
+
+
+Result :
+
+![VariableCheckerUseExample6](https://github.com/user-attachments/assets/6a669115-819b-4564-8ecf-4126dfed1ea8)
+
+**Note :** If you need more documentation check out the VariableChecker class.
 
 
 ## ➤ Installation :
@@ -68,20 +91,20 @@ After that **click on the 'Add package from git URL...' button**
 
 ![image](https://github.com/user-attachments/assets/125918bd-e34d-41b5-96ee-49f6dcdb42e7)
 
-Copy (Ctrl C) and paste (Ctrl V) the project link [https://github.com/Alexandre94fr/Instantiator.git] into this :
+Copy (Ctrl C) and paste (Ctrl V) the project link [ https://github.com/Alexandre94fr/VariableChecker.git ] into this :
 
 ![image](https://github.com/user-attachments/assets/1a486ff7-0708-4faf-9e59-4194044a2fa7)
 
 And finally **press the 'Add' button**
 
-![image](https://github.com/user-attachments/assets/328133d4-0fd5-473d-aff9-93912227f065)
+![image](https://github.com/user-attachments/assets/c1e655a5-7b00-44b4-9c77-104036514461)
 
-Good job, now you can use the Instantiator, have fun ^^
+Good job, now you can use the VariableChecker, have fun ^^
 
 
 ## ➤ License :
 
-As mentioned earlier, you're free to use Instantiator in your projects. 
+As mentioned earlier, you're free to use VariableChecker in your projects. 
 
 If you release a game using this tool, I’d appreciate a small credit, for example, as “External Technical Help”.
 
