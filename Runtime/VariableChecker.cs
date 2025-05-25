@@ -90,7 +90,7 @@ namespace VariableCheckerPackage
                     $"{GetCheckWarningMessagePrefix(p_gameObjectName, p_variableToCheck.variableName)} is not a number, " +
                     $"so we can't test it throw the {nameof(IsNumberVariableUnderZeroCheck)} check.\n" +
 
-                    $"THE TEST HAS BEEN IGNORED"
+                    $"THE CHECK HAS BEEN IGNORED"
                 );
                 return false;
             }
@@ -115,7 +115,7 @@ namespace VariableCheckerPackage
                     $"{GetCheckWarningMessagePrefix(p_gameObjectName, p_variableToCheck.variableName)} is not a number, " +
                     $"so we can't test it throw the {nameof(IsNumberVariableEqualZeroCheck)} check.\n" +
 
-                    $"THE TEST HAS BEEN IGNORED"
+                    $"THE CHECK HAS BEEN IGNORED"
                 );
                 return false;
             }
