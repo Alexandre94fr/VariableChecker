@@ -14,7 +14,7 @@ namespace VariableCheckerPackage
             IsVariableNullCheck,
         };
 
-        static string GetErrorMessagePrefix(string p_gameObjectName, string p_variableName)
+        public static string GetCheckErrorMessagePrefix(string p_gameObjectName, string p_variableName)
         {
             return $"<color=red>ERROR !</color> The variable '{p_variableName}' in '{p_gameObjectName}' GameObject";
         }
@@ -26,7 +26,7 @@ namespace VariableCheckerPackage
             if (p_variableToCheck.variable == null || (p_variableToCheck.variable is UnityEngine.Object unityObject && unityObject == null))
             {
                 Debug.LogError(
-                    $"{GetErrorMessagePrefix(p_gameObjectName, p_variableToCheck.variableName)} is null, " +
+                    $"{GetCheckErrorMessagePrefix(p_gameObjectName, p_variableToCheck.variableName)} is null, " +
                     $"please set it through the Unity inspector, or directly at the variable initialization."
                 );
                 return true;
@@ -40,7 +40,7 @@ namespace VariableCheckerPackage
             if ((float)p_variableToCheck.variable < 0)
             {
                 Debug.LogError(
-                    $"{GetErrorMessagePrefix(p_gameObjectName, p_variableToCheck.variableName)} is under zero."
+                    $"{GetCheckErrorMessagePrefix(p_gameObjectName, p_variableToCheck.variableName)} is under zero."
                 );
                 return true;
             }
@@ -53,7 +53,7 @@ namespace VariableCheckerPackage
             if ((float)p_variableToCheck.variable == 0)
             {
                 Debug.LogError(
-                    $"{GetErrorMessagePrefix(p_gameObjectName, p_variableToCheck.variableName)} equals zero."
+                    $"{GetCheckErrorMessagePrefix(p_gameObjectName, p_variableToCheck.variableName)} equals zero."
                 );
                 return true;
             }
