@@ -37,7 +37,7 @@ namespace VariableCheckerPackage
 
         public static bool IsNumberVariableUnderZeroCheck(string p_gameObjectName, (object variable, string variableName) p_variableToCheck)
         {
-            if ((float)p_variableToCheck.variable < 0)
+            if (p_variableToCheck.variable is float variableFloat && variableFloat < 0)
             {
                 Debug.LogError(
                     $"{GetCheckErrorMessagePrefix(p_gameObjectName, p_variableToCheck.variableName)} is under zero."
@@ -50,7 +50,7 @@ namespace VariableCheckerPackage
 
         public static bool IsNumberVariableEqualZeroCheck(string p_gameObjectName, (object variable, string variableName) p_variableToCheck)
         {
-            if ((float)p_variableToCheck.variable == 0)
+            if (p_variableToCheck.variable is float variableFloat && variableFloat == 0)
             {
                 Debug.LogError(
                     $"{GetCheckErrorMessagePrefix(p_gameObjectName, p_variableToCheck.variableName)} equals zero."
