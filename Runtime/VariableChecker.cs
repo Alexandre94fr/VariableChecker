@@ -14,6 +14,11 @@ namespace VariableCheckerPackage
             IsVariableNullCheck,
         };
 
+        static string GetErrorMessagePrefix(string p_gameObjectName, string p_variableName)
+        {
+            return $"ERROR ! The variable '{p_variableName}' in '{p_gameObjectName}' GameObject";
+        }
+
         #region -= Checks =-
 
         public static bool IsVariableNullCheck(string p_gameObjectName, (object variable, string variableName) p_variableToCheck)
@@ -21,8 +26,8 @@ namespace VariableCheckerPackage
             if (p_variableToCheck.variable == null || (p_variableToCheck.variable is UnityEngine.Object unityObject && unityObject == null))
             {
                 Debug.LogError(
-                    $"ERROR ! The variable '{p_variableToCheck.variableName}' in '{p_gameObjectName}' GameObject is null," +
-                    $" please set it through the Unity inspector, or directly at the variable initialization."
+                    $"{GetErrorMessagePrefix(p_gameObjectName, p_variableToCheck.variableName)} is null, " +
+                    $"please set it through the Unity inspector, or directly at the variable initialization."
                 );
                 return true;
             }
@@ -35,7 +40,7 @@ namespace VariableCheckerPackage
             if ((float)p_variableToCheck.variable < 0)
             {
                 Debug.LogError(
-                    $"ERROR ! The variable '{p_variableToCheck.variableName}' in '{p_gameObjectName}' GameObject is under zero."
+                    $"{GetErrorMessagePrefix(p_gameObjectName, p_variableToCheck.variableName)} is under zero."
                 );
                 return true;
             }
@@ -48,7 +53,7 @@ namespace VariableCheckerPackage
             if ((float)p_variableToCheck.variable == 0)
             {
                 Debug.LogError(
-                    $"ERROR ! The variable '{p_variableToCheck.variableName}' in '{p_gameObjectName}' GameObject equals zero."
+                    $"{GetErrorMessagePrefix(p_gameObjectName, p_variableToCheck.variableName)} equals zero."
                 );
                 return true;
             }
