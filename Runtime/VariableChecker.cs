@@ -60,7 +60,7 @@ namespace VariableCheckerPackage
         #endregion
 
         /// <summary>
-        /// Returns if the given variables are correcly setted (by default it's only checking if it's null).
+        /// Returns if the given variables are valid (by default it's only checking if it's null).
         ///  
         /// <para> ------------------- </para>
         /// 
@@ -68,7 +68,7 @@ namespace VariableCheckerPackage
         /// 
         /// <para> Sadly we can't pass your variables as references because the keyword 'params' before it is incompatible. </para>
         /// 
-        /// <para> However you can use instead the <see cref = "IsVariableCorrectlySetted"/> method. </para>
+        /// <para> However you can use instead the <see cref = "IsVariableValid"/> method. </para>
         /// 
         /// <para> ------------------- </para>
         /// 
@@ -76,7 +76,7 @@ namespace VariableCheckerPackage
         /// 
         /// void Start()
         /// {
-        ///     if (!VariablesChecker.AreVariablesCorrectlySetted(name, null,
+        ///     if (!VariablesChecker.AreVariablesValid(name, null,
         ///         (_exampleVariable1, nameof(_exampleVariable1)),
         ///         (_exampleVariable2, nameof(_exampleVariable2)),
         ///         (_exampleVariable3, nameof(_exampleVariable3))
@@ -111,11 +111,11 @@ namespace VariableCheckerPackage
         /// 
         /// void Start()
         /// {
-        ///     VariablesChecker.AreVariablesCorrectlySetted(name, CUSTOM_VARIABLE_CHECKS,
+        ///     if (!VariablesChecker.AreVariablesValid(name, CUSTOM_VARIABLE_CHECKS,
         ///         (_exampleVariable1, nameof(_exampleVariable1)),
         ///         (_exampleVariable2, nameof(_exampleVariable2)),
         ///         (_exampleVariable3, nameof(_exampleVariable3))
-        ///     );
+        ///     )) return;
         /// }
         /// </code> </para> </summary>
         /// <param name = "p_variableOwnerName"> The variable owner name, can be for example the GameObject name, or the Class name. </param>
@@ -123,7 +123,7 @@ namespace VariableCheckerPackage
         /// that list of functions correspond to all the checks that the given variable will pass throw, to use default ones just pass 'null'.
         /// You can see the default ones in <see cref = "DEFAULT_VARIABLE_CHECKS"/> </param>
         /// <param name = "p_variablesToCheck"> A params of tuple (an object and a string) </param>
-        public static bool AreVariablesCorrectlySetted(string p_variableOwnerName,
+        public static bool AreVariablesValid(string p_variableOwnerName,
             List<Func<string, (object variable, string variableName), bool>> p_customVariableChecks = null,
             params (object variable, string variableName)[] p_variablesToCheck)
         {
@@ -155,14 +155,14 @@ namespace VariableCheckerPackage
 
         /// <summary>
         /// <b> WARNING ! </b> Not fully usable for now.
-        /// <para> Please use '<see cref="AreVariablesCorrectlySetted"/>'. </para>
+        /// <para> Please use '<see cref="AreVariablesValid"/>' instead. </para>
         /// </summary>
         /// <param name = "p_gameObjectName">  </param>
         /// <param name = "p_variable">  </param>
         /// <param name = "p_variableName">  </param>
         /// <param name = "p_customVariableChecks">  </param>
         [Obsolete]
-        public static bool IsVariableCorrectlySetted(string p_gameObjectName, ref object p_variable, string p_variableName,
+        public static bool IsVariableValid(string p_gameObjectName, ref object p_variable, string p_variableName,
             List<Func<string, (object variable, string variableName), bool>> p_customVariableChecks)
         {
             bool areVariablesCorreclySetted = true;
